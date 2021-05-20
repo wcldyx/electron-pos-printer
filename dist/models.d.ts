@@ -34,7 +34,7 @@ export interface PosPrintTableField {
     height?: string;
 }
 declare type Base = string | number | boolean | null;
-export interface PosPrintDataBase {
+export declare interface PosPrintDataBase {
     /**
      * @property type
      * @description type data to print: 'text' | 'barCode' | 'qrcode' | 'image' | 'table'
@@ -48,10 +48,10 @@ export interface PosPrintDataBase {
  * @interface
  * @name PosPrintData
  * **/
-export interface PosPrintDataText extends PosPrintDataBase {
+export declare interface PosPrintDataText extends PosPrintDataBase {
     type: 'text';
 }
-export interface PosPrintDataBarCode extends PosPrintDataBase {
+export declare interface PosPrintDataBarCode extends PosPrintDataBase {
     type: 'barCode';
     width: number;
     height: number;
@@ -59,7 +59,7 @@ export interface PosPrintDataBarCode extends PosPrintDataBase {
     displayValue?: boolean;
     position?: 'left' | 'center' | 'right';
 }
-export interface PosPrintDataTable extends PosPrintDataBase {
+export declare interface PosPrintDataTable extends PosPrintDataBase {
     type: 'table';
     borderWidth?: number;
     borderStyle?: 'dashed' | 'dotted' | 'double' | 'groove' | 'solid';
@@ -70,26 +70,25 @@ export interface PosPrintDataTable extends PosPrintDataBase {
     tableBodyStyle?: string;
     tableFooterStyle?: string;
 }
-export interface PosPrintDataImage extends PosPrintDataBase {
+export declare interface PosPrintDataImage extends PosPrintDataBase {
     type: 'image';
     path: string;
     position?: 'left' | 'center' | 'right';
     width?: string;
     height?: string;
 }
-export interface PosPrintDataQrCode extends PosPrintDataBase {
+export declare interface PosPrintDataQrCode extends PosPrintDataBase {
     type: 'qrCode';
     position?: 'left' | 'center' | 'right';
     width?: number;
     height?: number;
 }
-export interface PosPrintDataRow extends PosPrintDataBase {
+export declare interface PosPrintDataRow extends PosPrintDataBase {
     type: 'cell';
     width?: number;
     height?: number;
     cells: Array<{
         value: Base;
-        width?: string;
         css?: object;
         style?: string;
     }>;

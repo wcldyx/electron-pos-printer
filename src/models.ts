@@ -50,7 +50,7 @@ type Base = string | number | boolean | null;
     barCode = 'barCode'
 }*/
 
-export interface PosPrintDataBase {
+export declare interface PosPrintDataBase {
     /**
      * @property type
      * @description type data to print: 'text' | 'barCode' | 'qrcode' | 'image' | 'table'
@@ -66,11 +66,11 @@ export interface PosPrintDataBase {
  * @name PosPrintData
  * **/
 
-export interface PosPrintDataText extends PosPrintDataBase {
+export declare interface PosPrintDataText extends PosPrintDataBase {
     type: 'text';
 }
 
-export interface PosPrintDataBarCode extends PosPrintDataBase {
+export declare interface PosPrintDataBarCode extends PosPrintDataBase {
     type: 'barCode';
     width: number;
     height: number;
@@ -79,7 +79,7 @@ export interface PosPrintDataBarCode extends PosPrintDataBase {
     position?: 'left' | 'center' | 'right';
 }
 
-export interface PosPrintDataTable extends PosPrintDataBase {
+export declare interface PosPrintDataTable extends PosPrintDataBase {
     type: 'table';
     borderWidth?: number;
     borderStyle?: 'dashed' | 'dotted' | 'double' | 'groove' | 'solid';
@@ -91,7 +91,7 @@ export interface PosPrintDataTable extends PosPrintDataBase {
     tableFooterStyle?: string;             // (type table), set custom style for table footer
 }
 
-export interface PosPrintDataImage extends PosPrintDataBase {
+export declare interface PosPrintDataImage extends PosPrintDataBase {
     type: 'image';
     path: string;
     position?: 'left' | 'center' | 'right';
@@ -99,7 +99,7 @@ export interface PosPrintDataImage extends PosPrintDataBase {
     height?: string;
 }
 
-export interface PosPrintDataQrCode extends PosPrintDataBase {
+export declare interface PosPrintDataQrCode extends PosPrintDataBase {
     type: 'qrCode';
     position?: 'left' | 'center' | 'right';
     width?: number;
@@ -107,7 +107,7 @@ export interface PosPrintDataQrCode extends PosPrintDataBase {
 }
 
 
-export interface PosPrintDataRow extends PosPrintDataBase {
+export declare interface PosPrintDataRow extends PosPrintDataBase {
     type: 'cell';
     width?: number;
     height?: number;
