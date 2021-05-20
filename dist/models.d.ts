@@ -34,7 +34,7 @@ export interface PosPrintTableField {
     height?: string;
 }
 declare type Base = string | number | boolean | null;
-export declare interface PosPrintDataBase {
+export interface PosPrintDataBase {
     /**
      * @property type
      * @description type data to print: 'text' | 'barCode' | 'qrcode' | 'image' | 'table'
@@ -48,10 +48,10 @@ export declare interface PosPrintDataBase {
  * @interface
  * @name PosPrintData
  * **/
-export declare interface PosPrintDataText extends PosPrintDataBase {
+export interface PosPrintDataText extends PosPrintDataBase {
     type: 'text';
 }
-export declare interface PosPrintDataBarCode extends PosPrintDataBase {
+export interface PosPrintDataBarCode extends PosPrintDataBase {
     type: 'barCode';
     width: number;
     height: number;
@@ -59,7 +59,7 @@ export declare interface PosPrintDataBarCode extends PosPrintDataBase {
     displayValue?: boolean;
     position?: 'left' | 'center' | 'right';
 }
-export declare interface PosPrintDataTable extends PosPrintDataBase {
+export interface PosPrintDataTable extends PosPrintDataBase {
     type: 'table';
     borderWidth?: number;
     borderStyle?: 'dashed' | 'dotted' | 'double' | 'groove' | 'solid';
@@ -70,20 +70,20 @@ export declare interface PosPrintDataTable extends PosPrintDataBase {
     tableBodyStyle?: string;
     tableFooterStyle?: string;
 }
-export declare interface PosPrintDataImage extends PosPrintDataBase {
+export interface PosPrintDataImage extends PosPrintDataBase {
     type: 'image';
     path: string;
     position?: 'left' | 'center' | 'right';
     width?: string;
     height?: string;
 }
-export declare interface PosPrintDataQrCode extends PosPrintDataBase {
+export interface PosPrintDataQrCode extends PosPrintDataBase {
     type: 'qrCode';
     position?: 'left' | 'center' | 'right';
     width?: number;
     height?: number;
 }
-export declare interface PosPrintDataRow extends PosPrintDataBase {
+export interface PosPrintDataRow extends PosPrintDataBase {
     type: 'cell';
     width?: number;
     height?: number;

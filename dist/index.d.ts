@@ -1,3 +1,3 @@
-import { PosPrintData, PosPrintOptions, PosPrintTableField, PosPrintType } from "./models";
+export * from "./models";
 import { PosPrinter } from "./post-printer";
-export { PosPrinter, PosPrintData, PosPrintOptions, PosPrintType, PosPrintTableField };
+export { PosPrinter };
