@@ -47,8 +47,9 @@ export class PosPrinter {
                 }, timeOutPerline * data.length + 200);
             }
             // open electron window
+            const width = (options.width || '170px').match(/\d+/)?.[0] ?? 170;
             let mainWindow = new BrowserWindow({
-                width: 280,
+                width: Number(width) + 100,
                 height: 768,
                 show: !!options.preview,
                 webPreferences: {

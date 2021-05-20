@@ -66,6 +66,7 @@ var PosPrinter = /** @class */ (function () {
     PosPrinter.print = function (data, options) {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            var _a, _b;
             // reject if printer name is not set in no preview mode
             if (!options.preview && !options.printerName) {
                 reject(new Error('A printer name is required').toString());
@@ -84,8 +85,9 @@ var PosPrinter = /** @class */ (function () {
                 }, timeOutPerline * data.length + 200);
             }
             // open electron window
+            var width = (_b = (_a = (options.width || '170px').match(/\d+/)) === null || _a === void 0 ? void 0 : _a[0]) !== null && _b !== void 0 ? _b : 170;
             var mainWindow = new electron_1.BrowserWindow({
-                width: 280,
+                width: Number(width) + 100,
                 height: 768,
                 show: !!options.preview,
                 webPreferences: {
