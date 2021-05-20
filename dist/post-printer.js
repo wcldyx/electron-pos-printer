@@ -40,10 +40,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PosPrinter = void 0;
+var electron_1 = require("electron");
 if (process.type == 'renderer') {
     throw new Error('electron-pos-printer: use remote.require("electron-pos-printer") in render process');
 }
-var _a = require('electron'), BrowserWindow = _a.BrowserWindow, ipcMain = _a.ipcMain;
 // ipcMain.on('pos-print', (event, arg)=> {
 //     const {data, options} = JSON.parse(arg);
 //     PosPrinter.print(data, options).then((arg)=>{
@@ -84,24 +84,27 @@ var PosPrinter = /** @class */ (function () {
                 }, timeOutPerline * data.length + 200);
             }
             // open electron window
-            var mainWindow = new BrowserWindow({
-                width: 210,
-                height: 1200,
+            var mainWindow = new electron_1.BrowserWindow({
+                width: 280,
+                height: 768,
                 show: !!options.preview,
                 webPreferences: {
                     nodeIntegration: true,
+                    contextIsolation: false,
+                    devTools: !!options.debugger
                 }
             });
             // mainWindow
             mainWindow.on('closed', function () {
                 mainWindow = null;
             });
+            options.debugger && mainWindow.webContents.openDevTools();
             /*mainWindow.loadURL(url.format({
-                pathname: path.join(__dirname, 'print.html'),
-                protocol: 'file:',
-                slashes: true,
-                // baseUrl: 'dist'
-            }));*/
+                      pathname: path.join(__dirname, 'print.html'),
+                      protocol: 'file:',
+                      slashes: true,
+                      // baseUrl: 'dist'
+                  }));*/
             mainWindow.loadFile(__dirname + '/pos.html');
             mainWindow.webContents.on('did-finish-load', function () { return __awaiter(_this, void 0, void 0, function () {
                 return __generator(this, function (_a) {
@@ -170,7 +173,7 @@ var PosPrinter = /** @class */ (function () {
      * @Return {Promise}
      * @description Render the print data in the render process
      *
-    */
+     */
     PosPrinter.renderPrintDocument = function (window, data) {
         var _this = this;
         return new Promise(function (resolve, reject) {
@@ -178,7 +181,7 @@ var PosPrinter = /** @class */ (function () {
                 return __generator(this, function (_a) {
                     switch (_a.label) {
                         case 0:
-                            if (line.type === 'image' && !line.path) {
+                            if (line.type === 'image' && line.value && !line.path) {
                                 window.close();
                                 reject(new Error('An Image path is required for type image').toString());
                                 return [2 /*return*/];
@@ -211,10 +214,10 @@ exports.PosPrinter = PosPrinter;
  * @function sendMsg
  * @description Sends messages to the render process to render the data specified in the PostPrintDate interface and recieves a status of true
  *
-*/
+ */
 function sendIpcMsg(channel, webContents, arg) {
     return new Promise(function (resolve, reject) {
-        ipcMain.once(channel + "-reply", function (event, result) {
+        electron_1.ipcMain.once(channel + "-reply", function (event, result) {
             if (result.status) {
                 resolve(result);
             }

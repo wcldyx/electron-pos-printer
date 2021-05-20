@@ -5,46 +5,85 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Print preview</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打印预览</title>
     <style>
         @page {
             margin: 0;
         }
+
+        *,*:before, *:after {
+            box-sizing: border-box;
+        }
         body {
             font-size: 12px;
+            margin: 0;
             /*line-height: 24px;*/
+            -webkit-print-color-adjust: exact;
+            color: black;
+            font-family: "Microsoft YaHei", 微软雅黑, "Microsoft JhengHei", 华文细黑, STHeiti, MingLiu;
+
         }
-        .barcode-container::after{content: '';display: table;clear: both;}
-        .font {font-size: 12px; margin: 0 15px;}
+
+        .barcode-container::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .font {
+            font-size: 12px;
+            margin: 0 15px;
+        }
 
         table {
             width: 100%;
             display: table;
             border-collapse: collapse;
             border-spacing: 0;
-            font-family: monospace, cursive;
         }
 
         table tbody {
-            border-top: 1px solid #999;
+            border-top: 1px solid;
         }
 
         table th, table td {
             padding: 7px 2px;
         }
 
-        table tr {
-            border-bottom: 1px dotted #999;
-            padding: 5px 0;
-            text-align: center;
-        }
-
         table img {
             max-height: 40px;
+        }
+
+        #main {
+            margin: auto;
+        }
+
+        #print {
+            display: none;
+        }
+
+        @media not print {
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 10px;
+            }
+
+            #main {
+                outline: 1px solid #dcdcdc;
+            }
+
+            #print {
+                display: inline-block;
+                margin-bottom: 20px;
+            }
         }
     </style>
 </head>
 <body>
+<button onclick="print()" id="print">打印试试</button>
 <section id="main"></section>
 <script src="libs/jquery.min.js"></script>
 <script src="libs/jsbarcode.min.js"></script>

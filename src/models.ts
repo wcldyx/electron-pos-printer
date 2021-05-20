@@ -17,6 +17,7 @@ export interface PosPrintOptions {
     width?: string;
     silent?: boolean;
     pageSize?: SizeOptions;
+    debugger?: boolean;
 }
 
 
@@ -24,12 +25,7 @@ export interface SizeOptions {
     height: number;
     width: number;
 }
-/**
- * @type PosPrintPosition
- * @description Alignment for type barCode and qrCode
- *
- */
-export declare type PosPrintPosition = 'left' | 'center' | 'right';
+
 /**
  * @interface
  * @name PosPrintTableField
@@ -38,40 +34,108 @@ export interface PosPrintTableField {
     type: 'text' | 'image';
     value?: string;
     path?: string;
-    css?: any;
+    css?: object;
     style?: string;
     width?: string;  // for type image
     height?: string; // for type image
+}
+
+type Base = string | number | boolean | null;
+
+/*export enum PosPrintType {
+    text= 'text',
+    qrCode = 'qrCode',
+    image = 'image',
+    table = 'table',
+    barCode = 'barCode'
+}*/
+
+export interface PosPrintDataBase {
+    /**
+     * @property type
+     * @description type data to print: 'text' | 'barCode' | 'qrcode' | 'image' | 'table'
+     */
+    type: PosPrintType;
+    value?: string;
+    css?: object;
+    style?: string;
 }
 
 /**
  * @interface
  * @name PosPrintData
  * **/
-export interface PosPrintData {
-    /**
-     * @property type
-     * @description type data to print: 'text' | 'barCode' | 'qrcode' | 'image' | 'table'
-    */
-    type: PosPrintType;
-    value?: string;
-    css?: any;
-    style?: string;
-    width?: string;
-    height?: string;
-    fontsize?: number;       // for barcodes
-    displayValue?: boolean;  // for barcodes
-    position?: PosPrintPosition;        // for type image, barcode and qrCode; values: 'left'| 'center' | 'right'
-    path?: string;                      // image path
-    tableHeader?: PosPrintTableField[] | string[],        // specify the columns in table header, to be used with type table
-    tableBody?: PosPrintTableField[][] | string[][],         //  specify the columns in table body, to be used with type table
-    tableFooter?: PosPrintTableField[] | string[],      //  specify the columns in table footer, to be used with type table
+
+export interface PosPrintDataText extends PosPrintDataBase {
+    type: 'text';
+}
+
+export interface PosPrintDataBarCode extends PosPrintDataBase {
+    type: 'barCode';
+    width: number;
+    height: number;
+    fontsize?: number;
+    displayValue?: boolean;
+    position?: 'left' | 'center' | 'right';
+}
+
+export interface PosPrintDataTable extends PosPrintDataBase {
+    type: 'table';
+    borderWidth?: number;
+    borderStyle?: 'dashed' | 'dotted' | 'double' | 'groove' | 'solid';
+    tableHeader?: Array<PosPrintTableField | Base>,        // specify the columns in table header, to be used with type table
+    tableBody?: Array<Array<PosPrintTableField | Base>>,         //  specify the columns in table body, to be used with type table
+    tableFooter?: Array<PosPrintTableField | Base>,      //  specify the columns in table footer, to be used with type table
     tableHeaderStyle?: string;                // (type table), set custom style for table header
     tableBodyStyle?: string;                // (type table), set custom style for table body
     tableFooterStyle?: string;             // (type table), set custom style for table footer
 }
+
+export interface PosPrintDataImage extends PosPrintDataBase {
+    type: 'image';
+    path: string;
+    position?: 'left' | 'center' | 'right';
+    width?: string;
+    height?: string;
+}
+
+export interface PosPrintDataQrCode extends PosPrintDataBase {
+    type: 'qrCode';
+    position?: 'left' | 'center' | 'right';
+    width?: number;
+    height?: number;
+}
+
+
+export interface PosPrintDataRow extends PosPrintDataBase {
+    type: 'cell';
+    width?: number;
+    height?: number;
+    cells: Array<{
+        value: Base;
+        css?: object;
+        style?: string;
+    }>;
+}
+
+export type PosPrintData =
+    PosPrintDataText
+    | PosPrintDataBarCode
+    | PosPrintDataTable
+    | PosPrintDataImage
+    | PosPrintDataQrCode
+    | PosPrintDataRow;
+
 /**
  * @type PosPrintType
  * @name PosPrintType
  * **/
-export declare type PosPrintType = 'text' | 'barCode' | 'qrCode' | 'image' | 'table';
+export type PosPrintType = 'text' | 'barCode' | 'qrCode' | 'image' | 'table' | 'cell';
+
+/*
+export enum PosPrintType {
+    text = 'text',
+    barCode = 'barCode',
+    qrCode = 'qrCode',
+    image = 'table'
+};*/

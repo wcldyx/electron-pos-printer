@@ -231,25 +231,80 @@ PosPrinter.print(data, options)
 | pageSize | (SizeOptions) Specify the width and height of the print out page |
 
 
-
-## The Print data object
-|           |                |
+## 文本/The Print text
+|     属性      |       描述         |
 |-----------|:--------------|
-| type      | (string) 'text', 'qrCode', 'barCode', 'image', 'table' // type 'text' can be an html string |
+| type      | 'text'
+| value | (string) value of the current row |
+| height | (number) applicable to type barCode and qrCode |
+| width | (number)  applicable to type barCode and qrCode |
+| style | (string)  styles, css rules can be used |
+| css | (string) css rules  ex: `{"font-size": "12px"}` |
+
+## 条形码/The Print barCode
+|     属性      |       描述         |
+|-----------|:--------------|
+| type      | 'barCode'
 | value | (string) value of the current row |
 | height | (number) applicable to type barCode and qrCode |
 | width | (number)  applicable to type barCode and qrCode |
 | style | (string)  styles, css rules can be used |
 | css | (string) css rules  ex: `{"font-size": "12px"}` |
 | displayValue | (boolean)  display value of barcode below barcode |
-| position | (string) 'left', 'center', 'right' applicable to type qrCode, barCode and image |
+| position | (string) 'left', 'center', 'right'|
+
+## 二维码/The Print qrCode
+|     属性      |       描述         |
+|-----------|:--------------|
+| type      | 'qrCode'
+| value | (string) value of the current row |
+| height | (number) applicable to type barCode and qrCode |
+| width | (number)  applicable to type barCode and qrCode |
+| style | (string)  styles, css rules can be used |
+| css | (string) css rules  ex: `{"font-size": "12px"}` |
+| position | (string) 'left', 'center', 'right'|
+
+
+## 图片/The Print image
+|     属性      |       描述         |
+|-----------|:--------------|
+| type      | 'qrCode'
+| value | (string) value of the current row |
+| height | (number) |
+| width | (number)  |
+| style | (string) |
+| css | (string) css rules  ex: `{"font-size": "12px"}` |
+| position | (string) 'left', 'center', 'right'|
 | path | (string) Path to the image asset |
+
+## 表格/The Print table
+|     属性      |       描述         |
+|-----------|:--------------|
+| type      | 'table'
+| value | (string) value of the current row |
+| height | (number) |
+| width | (number)  |
+| style | (string) |
+| css | (string) css rules  ex: `{"font-size": "12px"}` |
 | tableHeader | (PosPrintTableField[], string[]) the columns to be rendered in the header of the table, works with type table |
 | tableBody | (PosPrintTableField[][], string[][]) the columns to be rendered in the body of the table, works with type table |
 | tableFooter | (PosPrintTableField[], string[]) the columns to rendered it the footer of the table, works with type table |
 | tableHeaderStyle | (string) set custom style to the table header |
 | tableBodyStyle | (string) set custom style to the table body |
 | tableFooterStyle | (string) set custom style to the table footer |
+| borderWidth? | number; 表格边框粗细
+| borderStyle? | 'dashed' / 'dotted' / 'double' / 'groove' / 'solid'; 表格边框样式 /
+
+## 单元格文本/The Print cell
+|     属性      |       描述         |
+|-----------|:--------------|
+| type      | 'qrCode'
+| height | (number) |
+| width | (number)  |
+| style | (string) |
+| css | (string) css rules  ex: `{"font-size": "12px"}` |
+| cells | {value, css, style}[]
+
 
 ## Author
  - Hubert Formin
