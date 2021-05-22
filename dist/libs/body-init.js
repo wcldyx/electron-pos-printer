@@ -293,11 +293,8 @@ function getImageFromPath(arg) {
 
 function generatePageCell(arg) {
     const cells = arg.line.cells.map(x => {
-        const cell = $(`<div style="${x.style}">${x.value}</div>`);
-        setCss(cell, {
-            flex: 1,
-            ...x.css
-        });
+        const cell = $(`<div style="flex: 1;${x.style}">${x.value}</div>`);
+        x.css && setCss(cell, x.css);
         return cell;
     });
     const cellWrap = $(`<div style="display: flex;${arg.line.style}"></div>`);
