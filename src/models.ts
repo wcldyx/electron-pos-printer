@@ -106,16 +106,16 @@ export interface PosPrintDataQrCode extends PosPrintDataBase {
     height?: number;
 }
 
-
+export interface PosPrintDataRowField {
+    value: Base;
+    css?: object;
+    style?: string;
+}
 export interface PosPrintDataRow extends PosPrintDataBase {
     type: 'cell';
     width?: number;
     height?: number;
-    cells: Array<{
-        value: Base;
-        css?: object;
-        style?: string;
-    }>;
+    cells: PosPrintDataRowField[];
 }
 
 export type PosPrintData =
