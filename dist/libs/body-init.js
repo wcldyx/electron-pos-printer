@@ -12,7 +12,7 @@ const image_format = ['apng', 'bmp', 'gif', 'ico', 'cur', 'jpeg', 'jpg', 'jpeg',
     'pjp', 'png', 'svg', 'tif', 'tiff', 'webp'];
 
 ipcRender.on('body-init', function (event, arg) {
-    body.css({width: arg.width ? arg.width : 170, margin: arg.margin ? arg.margin : 0});
+    body.css({width: arg.width ? arg.width : 170, margin: arg.margin ? arg.margin : 0, ...arg.css});
     event.sender.send('body-init-reply', {status: true, error: null});
 });
 // render each line
@@ -27,6 +27,7 @@ function setCss(el, css) {
         $(el).css(key, item);
     }
 }
+
 
 async function renderDataToHTML(event, arg) {
     switch (arg.line.type) {
@@ -293,7 +294,7 @@ function getImageFromPath(arg) {
 function generatePageCell(arg) {
     const cells = arg.line.cells.map(x => {
         const cell = $(`<div style="${x.style}">${x.value}</div>`);
-        x.css && setCss(cell, {
+        setCss(cell, {
             flex: 1,
             ...x.css
         });
